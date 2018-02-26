@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Text, View } from "react-native";
+import {Text, ScrollView } from "react-native";
 import axios from "axios";
 import AlbumDetail from "./AlbumDetail";
 
@@ -8,7 +8,8 @@ class AlbumList extends Component {
 
   componentWillMount() {
   	console.log("HEERRRE~!!!!!!! is where we can debug!")
-  	 axios.get('https://rallycoding.herokuapp.com/api/music_albums')
+    var website = 'http://localhost:2403/my-artists'
+  	 axios.get(website)
   	 .then(response => { console.log("FILLLAAAYY!!!", response); this.setState({albums:response.data}) })
   }
   
@@ -28,14 +29,18 @@ class AlbumList extends Component {
   	return info.map( album => <AlbumDetail key={album.title} album={album}  />)
   }
 
+  purchasePage(e) {
+    
+  }
+
   render() {
 
   console.log("CURRENT STATE2: ", this.state.albums)
 
   return (
-    <View>
+    <ScrollView>
       {this.renderAlbums()}
-    </View> 
+    </ScrollView> 
   )
   }
 }
